@@ -24,6 +24,7 @@ import ca.uhn.fhir.model.dstu2.composite.MetaDt;
 import ca.uhn.fhir.narrative.DefaultThymeleafNarrativeGenerator;
 import ca.uhn.fhir.rest.server.HardcodedServerAddressStrategy;
 import ca.uhn.fhir.rest.server.RestfulServer;
+import ca.uhn.fhir.rest.server.interceptor.auth.AuthorizationInterceptor;
 import ca.uhn.fhir.rest.server.interceptor.*;
 import ca.uhn.fhir.validation.IValidatorModule;
 import ca.uhn.fhir.validation.ResultSeverityEnum;
@@ -146,6 +147,14 @@ public class JpaRestfulServer extends RestfulServer {
          * but makes the server much more scalable.
          */
         setPagingProvider(appCtx.getBean(DatabaseBackedPagingProvider.class));
+
+        /*
+         * TEST: Authorization interceptor
+         */
+
+        AuthorizationInterceptor authorizationInterceptor = new AuthorizationInterceptor();
+        BasicSecurityInterceptor basicSecurityInterceptor = new BasicSecurityInterceptor();
+        this.registerInterceptor(basicSecurityInterceptor);
 
         /*
          * This interceptor formats the output using nice colourful
