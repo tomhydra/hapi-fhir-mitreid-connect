@@ -20,6 +20,7 @@ import ca.uhn.fhir.to.TesterConfig;
 @Import(FhirTesterMvcConfig.class)
 public class FhirTesterConfig {
 
+	AuthorizingTesterUiClientFactory authorizingTesterUiClientFactory = new AuthorizingTesterUiClientFactory();
 	/**
 	 * This bean tells the testing webpage which servers it should configure itself
 	 * to communicate with. In this example we configure it to talk to the local
@@ -44,6 +45,7 @@ public class FhirTesterConfig {
 				.withBaseUrl(HapiProperties.getServerAddress())
 				.withName(HapiProperties.getServerName());
 		retVal.setRefuseToFetchThirdPartyUrls(HapiProperties.getTesterConfigRefustToFetchThirdPartyUrls());
+		retVal.setClientFactory(authorizingTesterUiClientFactory);
 		return retVal;
 	}
 
