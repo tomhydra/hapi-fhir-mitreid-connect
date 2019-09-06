@@ -1,6 +1,7 @@
 package ca.uhn.fhir.jpa.starter;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -18,6 +19,9 @@ import ca.uhn.fhir.to.TesterConfig;
  */
 @Configuration
 @Import(FhirTesterMvcConfig.class)
+@ComponentScan(
+		basePackages = {"ca.uhn.fhir.to, ca.uhn.fhir.jpa.starter.controllers"}
+)
 public class FhirTesterConfig {
 
 	AuthorizingTesterUiClientFactory authorizingTesterUiClientFactory = new AuthorizingTesterUiClientFactory();
