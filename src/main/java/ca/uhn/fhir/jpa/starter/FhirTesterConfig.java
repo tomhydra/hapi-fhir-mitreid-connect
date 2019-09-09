@@ -1,12 +1,15 @@
 package ca.uhn.fhir.jpa.starter;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.mitre.openid.connect.web.UserInfoInterceptor;
+import org.springframework.context.annotation.*;
 
 import ca.uhn.fhir.to.FhirTesterMvcConfig;
 import ca.uhn.fhir.to.TesterConfig;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
 
 //@formatter:off
 /**
@@ -19,12 +22,14 @@ import ca.uhn.fhir.to.TesterConfig;
  */
 @Configuration
 @Import(FhirTesterMvcConfig.class)
+@ImportResource("classpath:servlet-context.xml")
 @ComponentScan(
-		basePackages = {"ca.uhn.fhir.to, ca.uhn.fhir.jpa.starter.controllers"}
+		basePackages = {"ca.uhn.fhir.to, ca.uhn.fhir.jpa.starter.controllers, org.mitre.web"}
 )
 public class FhirTesterConfig {
 
 	AuthorizingTesterUiClientFactory authorizingTesterUiClientFactory = new AuthorizingTesterUiClientFactory();
+
 	/**
 	 * This bean tells the testing webpage which servers it should configure itself
 	 * to communicate with. In this example we configure it to talk to the local
@@ -49,7 +54,8 @@ public class FhirTesterConfig {
 				.withBaseUrl(HapiProperties.getServerAddress())
 				.withName(HapiProperties.getServerName());
 		retVal.setRefuseToFetchThirdPartyUrls(HapiProperties.getTesterConfigRefustToFetchThirdPartyUrls());
-		retVal.setClientFactory(authorizingTesterUiClientFactory);
+//		retVal.setClientFactory(authorizingTesterUiClientFactory);
+
 		return retVal;
 	}
 
