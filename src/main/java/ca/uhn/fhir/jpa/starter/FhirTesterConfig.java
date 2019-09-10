@@ -22,9 +22,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 @Import(FhirTesterMvcConfig.class)
-@ImportResource("classpath:servlet-context.xml")
 @ComponentScan(
-		basePackages = {"ca.uhn.fhir.to, ca.uhn.fhir.jpa.starter.controllers, org.mitre.web"}
+		basePackages = {"ca.uhn.fhir.to, org.mitre.openid.connect.client, ca.uhn.fhir.jpa.starter.controllers"}
 )
 public class FhirTesterConfig {
 
