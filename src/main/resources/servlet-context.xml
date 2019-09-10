@@ -233,7 +233,7 @@
     <bean class="org.mitre.openid.connect.client.service.impl.DynamicRegistrationClientConfigurationService" id="dynamicClientConfigurationService">
         <property name="template">
             <bean class="org.mitre.oauth2.model.RegisteredClient">
-                <property name="clientName" value="Simple Web App" />
+                <property name="clientName" value="Hapi Fhir server" />
                 <property name="scope">
                     <set value-type="java.lang.String">
                         <value>openid</value>
@@ -246,12 +246,12 @@
                 <property name="tokenEndpointAuthMethod" value="SECRET_BASIC" />
                 <property name="redirectUris">
                     <set>
-                        <value>http://localhost:8080/simple-web-app/openid_connect_login</value>
+                        <value>http://localhost:8080/hapi-fhir-jpaserver/openid_connect_login</value>
                     </set>
                 </property>
                 <!-- for signed requests -->
                 <property name="requestObjectSigningAlg" value="RS256" />
-                <property name="jwksUri" value="http://localhost:8080/simple-web-app/jwk" />
+                <property name="jwksUri" value="http://localhost:8080/hapi-fhir-jpaserver/jwk" />
             </bean>
         </property>
         <!--
@@ -278,8 +278,8 @@
             <map>
                 <entry key="http://localhost:8081/openid-connect-server-webapp/">
                     <bean class="org.mitre.oauth2.model.RegisteredClient">
-                        <property name="clientId" value="13e1d5ad-3dd3-4db3-8d4f-8be24c0ed185" />
-                        <property name="clientSecret" value="ZatUvgo5KFE5py4zw79FWtl8sgkrCLGSV__KJ1Z98JSPZJMQCJHs6j9T_B-fT2cpI7EItrR3a8Q9zNAVn_GmdA" />
+                        <property name="clientId" value="7b7ca90d-9ed2-48ce-82e4-834aee95846b" />
+                        <property name="clientSecret" value="AMLZhWTBgGSaeGktFLnadgLBCoib2vm_1Pt8yIZ5P_YZst4Kbux2LBZq4grbipktauINoFnVj4EcTj6Ev4u6uLw" />
                         <property name="scope">
                             <set value-type="java.lang.String">
                                 <value>openid</value>
@@ -292,7 +292,7 @@
                         <property name="tokenEndpointAuthMethod" value="SECRET_BASIC" />
                         <property name="redirectUris">
                             <set>
-                                <value>http://localhost:8080/simple-web-app/openid_connect_login</value>
+                                <value>http://localhost:8080/hapi-fhir-jpaserver/openid_connect_login</value>
                             </set>
                         </property>
                     </bean>
@@ -310,8 +310,8 @@
             <map>
                 <entry key="http://localhost:8081/openid-connect-server-webapp/">
                     <bean class="org.mitre.oauth2.model.RegisteredClient">
-                        <property name="clientId" value="client" />
-                        <property name="clientSecret" value="secret" />
+                        <property name="clientId" value="7b7ca90d-9ed2-48ce-82e4-834aee95846b" />
+                        <property name="clientSecret" value="AMLZhWTBgGSaeGktFLnadgLBCoib2vm_1Pt8yIZ5P_YZst4Kbux2LBZq4grbipktauINoFnVj4EcTj6Ev4u6uLw" />
                         <property name="scope">
                             <set value-type="java.lang.String">
                                 <value>openid</value>
@@ -324,7 +324,7 @@
                         <property name="tokenEndpointAuthMethod" value="SECRET_BASIC" />
                         <property name="redirectUris">
                             <set>
-                                <value>http://localhost:8080/simple-web-app/openid_connect_login</value>
+                                <value>http://localhost:8080/hapi-fhir-jpaserver/openid_connect_login</value>
                             </set>
                         </property>
 
@@ -334,7 +334,7 @@
         </property>
         <property name="template">
             <bean class="org.mitre.oauth2.model.RegisteredClient">
-                <property name="clientName" value="Simple Web App" />
+                <property name="clientName" value="Hapi Fhir server" />
                 <property name="scope">
                     <set value-type="java.lang.String">
                         <value>openid</value>
@@ -347,7 +347,7 @@
                 <property name="tokenEndpointAuthMethod" value="SECRET_BASIC" />
                 <property name="redirectUris">
                     <set>
-                        <value>http://localhost:8080/simple-web-app/openid_connect_login</value>
+                        <value>http://localhost:8080/hapi-fhir-jpaserver/openid_connect_login</value>
                     </set>
                 </property>
             </bean>
