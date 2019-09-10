@@ -154,7 +154,7 @@ public class JpaRestfulServer extends RestfulServer {
 
         AuthorizationInterceptor authorizationInterceptor = new AuthorizationInterceptor();
         BasicSecurityInterceptor basicSecurityInterceptor = new BasicSecurityInterceptor();
-        this.registerInterceptor(basicSecurityInterceptor);
+//        this.registerInterceptor(basicSecurityInterceptor);
 
         /*
          * This interceptor formats the output using nice colourful
