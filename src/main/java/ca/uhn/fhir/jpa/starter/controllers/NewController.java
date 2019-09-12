@@ -2,13 +2,13 @@ package ca.uhn.fhir.jpa.starter.controllers;
 
 
 import ca.uhn.fhir.jpa.starter.FhirTesterConfig;
+import ca.uhn.fhir.to.model.HomeRequest;
 import org.mitre.openid.connect.client.OIDCAuthenticationFilter;
 import org.mitre.openid.connect.client.SubjectIssuerGrantedAuthority;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.Set;
 
 @Controller
-@ImportResource("classpath:servlet-context.xml")
-public class NewController  {
+@Import(FhirTesterConfig.class)
+public class NewController extends ca.uhn.fhir.to.BaseController {
     static final Logger ourLog = LoggerFactory.getLogger("NEW CONTROLLER");
 
     // filter reference so we can get class names and things like that.
@@ -40,6 +41,16 @@ public class NewController  {
         return "login";
 
     }
+
+    @RequestMapping({"/test"})
+    public String actionAbout(HttpServletRequest theServletRequest, HomeRequest theRequest, ModelMap theModel) {
+        this.addCommonParams(theServletRequest, theRequest, theModel);
+        theModel.put("notHome", true);
+        theModel.put("extraBreadcrumb", "About");
+        ourLog.info(this.logPrefix(theModel) + "Displayed about page");
+        return "about";
+    }
+
 
 
     @RequestMapping(value = "/auth", method = RequestMethod.GET)
