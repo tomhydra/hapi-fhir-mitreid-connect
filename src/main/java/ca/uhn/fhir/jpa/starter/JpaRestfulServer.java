@@ -30,6 +30,11 @@ import ca.uhn.fhir.validation.IValidatorModule;
 import ca.uhn.fhir.validation.ResultSeverityEnum;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.Meta;
+import org.mitre.oauth2.model.RegisteredClient;
+import org.mitre.openid.connect.client.service.ClientConfigurationService;
+import org.mitre.openid.connect.client.service.impl.StaticClientConfigurationService;
+import org.mitre.openid.connect.client.service.impl.StaticServerConfigurationService;
+import org.mitre.openid.connect.config.ServerConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.cors.CorsConfiguration;
@@ -37,6 +42,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import javax.servlet.ServletException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Set;
 
 public class JpaRestfulServer extends RestfulServer {
@@ -154,7 +160,32 @@ public class JpaRestfulServer extends RestfulServer {
 
         AuthorizationInterceptor authorizationInterceptor = new AuthorizationInterceptor();
         BasicSecurityInterceptor basicSecurityInterceptor = new BasicSecurityInterceptor();
-        this.registerInterceptor(basicSecurityInterceptor);
+        OpenIdConnectBearerTokenServerInterceptor oInterceptor = new OpenIdConnectBearerTokenServerInterceptor();
+
+        /*
+         * Setup client configuration service
+         */
+        StaticClientConfigurationService scli = new StaticClientConfigurationService();
+        scli.setClients(new HashMap<>());
+        scli.getClients().put("http://localhost:8081/openid-connect-server-webapp/", new RegisteredClient());
+
+        /*
+         * Setup server configuration service
+         */
+        StaticServerConfigurationService srv = new StaticServerConfigurationService();
+        srv.setServers(new HashMap<String, ServerConfiguration>());
+        ServerConfiguration srvCfg = new ServerConfiguration();
+        srvCfg.setJwksUri("http://localhost:8081/openid-connect-server-webapp/jwk");
+        srvCfg.setIssuer("http://localhost:8081/openid-connect-server-webapp/");
+        srv.getServers().put("http://localhost:8081/openid-connect-server-webapp/", srvCfg);
+        srv.afterPropertiesSet();
+
+        /*
+         * Register OpenIdConnectBearerTokenServerInterceptor
+         */
+        oInterceptor.setClientConfigurationService(scli);
+        oInterceptor.setServerConfigurationService(srv);
+        this.registerInterceptor(oInterceptor);
 
         /*
          * This interceptor formats the output using nice colourful

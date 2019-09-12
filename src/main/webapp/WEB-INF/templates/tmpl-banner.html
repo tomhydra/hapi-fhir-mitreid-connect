@@ -17,7 +17,8 @@
 			You have to login to use this system.
 			<a class="btn btn-primary" href="http://localhost:8080/hapi-fhir-jpaserver/openid_connect_login?identifier=http%3A%2F%2Flocalhost%3A8081%2Fopenid-connect-server-webapp%2F">Register / Login</a>
 		</div>
-		<p  th:unless="${errorMsg.contains('AuthenticationException')}" th:text="${errorMsg}"></p>
+<!--		<p  th:unless="${errorMsg.contains('AuthenticationException')}" th:text="${errorMsg}"></p>-->
+        <p th:text="${errorMsg}"></p>
 	</div>
 	
 </div>
