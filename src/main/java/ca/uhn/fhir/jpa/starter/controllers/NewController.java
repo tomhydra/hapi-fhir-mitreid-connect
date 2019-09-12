@@ -36,22 +36,14 @@ public class NewController extends ca.uhn.fhir.to.BaseController {
 
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(ModelMap model) {
-
+    public String login(HttpServletRequest theServletRequest, HomeRequest theRequest, ModelMap theModel) {
+        this.addCommonParams(theServletRequest, theRequest, theModel);
+        theModel.put("notHome", true);
+        theModel.put("extraBreadcrumb", "Login");
+        ourLog.info(this.logPrefix(theModel) + "Displayed login page");
         return "login";
 
     }
-
-    @RequestMapping({"/test"})
-    public String actionAbout(HttpServletRequest theServletRequest, HomeRequest theRequest, ModelMap theModel) {
-        this.addCommonParams(theServletRequest, theRequest, theModel);
-        theModel.put("notHome", true);
-        theModel.put("extraBreadcrumb", "About");
-        ourLog.info(this.logPrefix(theModel) + "Displayed about page");
-        return "about";
-    }
-
-
 
     @RequestMapping(value = "/auth", method = RequestMethod.GET)
     public ModelAndView auth(ModelMap model) {

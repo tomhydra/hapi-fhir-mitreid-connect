@@ -1,13 +1,28 @@
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:include="tmpl-head :: head">
+    <title>Register / Login</title>
 </head>
+
 <body>
+<form action="" method="get" id="outerForm">
+    <div th:replace="tmpl-navbar-top :: top"></div>
 
-<h1>You have to login to see this page.</h1>
-<a href="http://localhost:8080/hapi-fhir-jpaserver/openid_connect_login?identifier=http%3A%2F%2Flocalhost%3A8081%2Fopenid-connect-server-webapp%2F">Register / Login</a>
+    <div class="container-fluid">
+        <div class="row">
+            <div th:replace="tmpl-navbar-left :: left"></div>
 
+            <div class="col-sm-9 col-sm-offset-3 col-md-9 col-md-offset-3 main">
+
+                <div th:replace="tmpl-banner :: banner"></div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="tmpl-footer :: footer"></div>
+</form>
 </body>
 </html>
