@@ -40,6 +40,7 @@ public class HapiProperties {
     static final String MAX_FETCH_SIZE = "max_fetch_size";
     static final String MAX_PAGE_SIZE = "max_page_size";
     static final String SERVER_ADDRESS = "server_address";
+    static final String OPENID_SERVER_ADDRESS = "openid_server_address";
     static final String SERVER_ID = "server.id";
     static final String SERVER_NAME = "server.name";
     static final String SUBSCRIPTION_EMAIL_ENABLED = "subscription.email.enabled";
@@ -204,6 +205,10 @@ public class HapiProperties {
 
     public static String getServerAddress() {
         return HapiProperties.getProperty(SERVER_ADDRESS);
+    }
+
+    public static String getOpenidServerAddress() {
+        return HapiProperties.getProperty(OPENID_SERVER_ADDRESS);
     }
 
     public static Integer getDefaultPageSize() {

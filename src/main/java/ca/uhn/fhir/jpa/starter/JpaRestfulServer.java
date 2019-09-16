@@ -155,11 +155,9 @@ public class JpaRestfulServer extends RestfulServer {
         setPagingProvider(appCtx.getBean(DatabaseBackedPagingProvider.class));
 
         /*
-         * TEST: Authorization interceptor
+         * OpenId interceptor
          */
 
-        AuthorizationInterceptor authorizationInterceptor = new AuthorizationInterceptor();
-        BasicSecurityInterceptor basicSecurityInterceptor = new BasicSecurityInterceptor();
         OpenIdConnectBearerTokenServerInterceptor oInterceptor = new OpenIdConnectBearerTokenServerInterceptor();
 
         /*
@@ -167,7 +165,7 @@ public class JpaRestfulServer extends RestfulServer {
          */
         StaticClientConfigurationService scli = new StaticClientConfigurationService();
         scli.setClients(new HashMap<>());
-        scli.getClients().put("http://localhost:8081/openid-connect-server-webapp/", new RegisteredClient());
+        scli.getClients().put(HapiProperties.getOpenidServerAddress(), new RegisteredClient());
 
         /*
          * Setup server configuration service
@@ -175,9 +173,9 @@ public class JpaRestfulServer extends RestfulServer {
         StaticServerConfigurationService srv = new StaticServerConfigurationService();
         srv.setServers(new HashMap<String, ServerConfiguration>());
         ServerConfiguration srvCfg = new ServerConfiguration();
-        srvCfg.setJwksUri("http://localhost:8081/openid-connect-server-webapp/jwk");
-        srvCfg.setIssuer("http://localhost:8081/openid-connect-server-webapp/");
-        srv.getServers().put("http://localhost:8081/openid-connect-server-webapp/", srvCfg);
+        srvCfg.setJwksUri( HapiProperties.getOpenidServerAddress() + "jwk");
+        srvCfg.setIssuer(HapiProperties.getOpenidServerAddress());
+        srv.getServers().put(HapiProperties.getOpenidServerAddress(), srvCfg);
         srv.afterPropertiesSet();
 
         /*
