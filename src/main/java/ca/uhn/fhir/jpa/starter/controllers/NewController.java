@@ -52,14 +52,4 @@ public class NewController extends ca.uhn.fhir.to.BaseController {
 
     }
 
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String test(Model model, Principal p) {
-        model.addAttribute("admins", admins);
-        return "admin";
-
-    }
-
-
-
 }
