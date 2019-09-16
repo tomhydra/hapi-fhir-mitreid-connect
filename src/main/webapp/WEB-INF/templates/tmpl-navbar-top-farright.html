@@ -2,6 +2,12 @@
 <ul th:fragment="farright">
 <!--	<li><a href="https://github.com/jamesagnew/hapi-fhir"><span class="fa fa-github topbarIcon"></span>&nbsp;Source Code</a></li>-->
 	<li><a href="about"><span class="fa fa-question-circle topbarIcon"></span>&nbsp;About</a></li>
-	<li><a href="auth"><span class="fa fa-question-circle topbarIcon"></span>&nbsp;Login</a></li>
+	<li th:unless="${userInfo}"><a href="auth"><span class="fa fa-sign-in topbarIcon"></span>&nbsp;Login</a></li>
+	<li th:if="${userInfo}" class="dropdown">
+		<a id="userButton" class="dropdown-toggle" data-toggle="dropdown" href=""><i class="fa fa-user"></i> <span  th:text="${userInfo.name}"></span> <span class="caret"></span></a>
+		<ul class="dropdown-menu pull-right">
+			<li><a href="j_spring_security_logout" data-toggle="collapse" data-target=".nav-collapse"><i class="icon-remove"></i> Log out</a></li>
+		</ul>
+	</li>
 
 </ul>
